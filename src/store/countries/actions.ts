@@ -1,3 +1,5 @@
 import { createAction } from 'typesafe-actions';
 
-export const getAllCountries = createAction('GET_ALL_COUNTRIES');
+export const getCountries = createAction('GET_ALL');
+
+

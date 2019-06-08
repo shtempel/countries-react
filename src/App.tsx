@@ -3,11 +3,15 @@ import { ConnectedRouter } from 'connected-react-router';
 
 import { appHistory } from './store/store';
 import routes from './routes';
+import { Header } from './components/header/header';
 
-import './App.css';
+import './app.scss';
 
 export const App: FC = () => {
     return (
-        <ConnectedRouter history={ appHistory }>{ routes }</ConnectedRouter>
+        <div className='app'>
+            <Header/>
+            <ConnectedRouter history={ appHistory }>{ routes }</ConnectedRouter>
+        </div>
     );
 };

@@ -1,0 +1,21 @@
+@import './../../styles/variables';
+
+.button {
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  background-color: $_COLOR_OUTER_SPACE;
+  color: $_COLOR_WHITE;
+
+  &:active {
+    background-color: $_COLOR_CROWN_OF_THORNS;
+  }
+}
+
+.active-button {
+  background-color: $_COLOR_MANDY;
+}
+
+.disabled-button {
+  background-color: $_COLOR_DOVE_GRAY;
+}

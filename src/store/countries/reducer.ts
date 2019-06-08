@@ -7,14 +7,13 @@ export interface CountriesState {
 
 }
 
-export type MoviesAction =
-    | ActionType<typeof actions>;
+export type MoviesAction = | ActionType<typeof actions>;
 
 export const initialState: CountriesState = {};
 
 const reducer: Reducer<CountriesState, MoviesAction> = (state = initialState, action) => {
     switch (action.type) {
-        case getType(actions.getAllCountries): {
+        case getType(actions.getCountries): {
             return {
                 ...state
             }
