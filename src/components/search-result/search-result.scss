@@ -1,0 +1,11 @@
+@import '../../styles/variables';
+
+.search-result {
+  max-height: 150px;
+  overflow: auto;
+  @include column-direction;
+
+  span {
+    color: $_COLOR_WHITE;
+  }
+}

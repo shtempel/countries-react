@@ -11,7 +11,6 @@ interface ButtonProps {
     onClick?: any;
     value?: string;
     type: ButtonType;
-    class?: string;
     disabledCondition?: boolean;
 }
 
@@ -20,7 +19,7 @@ export const Button: FC<ButtonProps> = (props: ButtonProps) => {
         <button { ...props }
                 disabled={ props.disabledCondition }
                 className={
-                    cn(`button active-button ${ props.class }`, { 'disabled-button': props.disabledCondition })
+                    cn(`button active-button ${ props.className }`, { 'disabled-button': props.disabledCondition })
                 }>
             { props.name }
         </button>

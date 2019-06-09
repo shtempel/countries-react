@@ -3,7 +3,8 @@ import { ConnectedRouter } from 'connected-react-router';
 
 import { appHistory } from './store/store';
 import routes from './routes';
-import { Header } from './components/header/header';
+import Header from './components/header/header';
+import  SearchResult  from './components/search-result/search-result';
 
 import './app.scss';
 
@@ -12,6 +13,7 @@ export const App: FC = () => {
         <div className='app'>
             <Header/>
             <ConnectedRouter history={ appHistory }>{ routes }</ConnectedRouter>
+            <SearchResult/>
         </div>
     );
 };

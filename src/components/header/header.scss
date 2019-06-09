@@ -25,23 +25,4 @@
       flex: 1;
     }
   }
-
-  .filters {
-    flex-wrap: wrap;
-    @include row-direction;
-    justify-content: space-between;
-
-    span {
-      margin-top: 5px;
-    }
-  }
-
-  .search-result {
-    max-height: 50px;
-    @include column-direction;
-
-    span {
-      color: $_COLOR_WHITE;
-    }
-  }
 }

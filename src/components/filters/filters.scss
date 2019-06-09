@@ -1,0 +1,11 @@
+@import '../../styles/variables';
+
+.filters {
+  flex-wrap: wrap;
+  @include row-direction;
+  justify-content: space-between;
+
+  span {
+    margin-top: 5px;
+  }
+}

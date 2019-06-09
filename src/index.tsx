@@ -5,11 +5,9 @@ import { store } from './store/store';
 import { App } from './App';
 import { Provider } from 'react-redux';
 import { initTranslationService } from './services/translation-service';
-import { init } from './store/actions';
 
 import './index.scss';
 
-store.dispatch(init());
 initTranslationService().init({ lng: store.getState().language });
 
 ReactDOM.render(

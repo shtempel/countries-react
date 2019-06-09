@@ -13,6 +13,6 @@
     "currency": "currency",
     "language": "language",
     "region": "region",
-    "subRegion": "subregion"
+    "subregion": "subregion"
   }
 }

@@ -1,7 +1,9 @@
-import { AppSavedState } from './saved-state/interfaces';
 import { Router } from './router/interfaces';
+import { CountryResponse } from '../services/typings';
 
-export interface AppState extends AppSavedState {
+export interface AppState {
     router: Router;
     language: string;
+    query: string;
+    countries: CountryResponse[];
 }

@@ -1,36 +1,36 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Button, FilterPill, searchFilterMap } from '..';
-import { CountryResponse } from '../../services/typings';
-import countriesService from './../../services/countries-service';
+import { Button, Filters } from '..';
 
 import './header.scss';
+import { connect } from 'react-redux';
+import { AppState } from '../../store/typings';
+import { setQueryString } from '../../store/query-string/actions';
+import { fetchCountries } from '../../store/countries/actions';
 
-export const Header: FC = () => {
+interface HeaderProps {
+    setQueryString(payload: string): void;
+    fetchCountries(): void;
+}
+
+const mapStateToProps = (state: AppState) => ({});
+
+const mapDispatchToProps = {
+    setQueryString,
+    fetchCountries
+};
+
+export const Header: FC<HeaderProps> = (props: HeaderProps) => {
     const { t } = useTranslation();
+    const { setQueryString, fetchCountries } = props;
     const [value, setValue] = useState('');
     const [filterName, setFilter] = useState('all');
-    const initialState: CountryResponse[] = [];
-    const [response, setResponse] = useState(initialState);
     const isDisabledSearchInput: boolean = filterName === 'all';
 
-    const handleChange = (e: any) => {
-        setValue(e.target.value);
+    const handleChange = (e: any) => setQueryString(e.target.value);
 
-        getCountries(e.target.value);
-    };
-
-    const submitEvent = () => getCountries(value);
-
-    const getCountries = (query: string) => {
-        filterName === 'all'
-            ? countriesService.getCountries(`${ filterName }`)
-                .then(res => setResponse(res))
-            : countriesService.getCountries(`${ filterName }/${ query }`)
-                .then((res: CountryResponse[]) => setResponse(res))
-                .catch(error => setResponse([]))
-    };
+    const submitEvent = () => fetchCountries();
 
     const selectFilter = (e: any) => {
         const id: string = e.target.id;
@@ -40,35 +40,6 @@ export const Header: FC = () => {
         setFilter(id);
         setValue('');
     };
-
-    const filters: ReactNode = (
-        <div className='filters'>
-            {
-                searchFilterMap.map(
-                    (filter: { id: string, title: string }) =>
-                        <FilterPill onClick={ selectFilter }
-                                    id={ filter.id }
-                                    key={ filter.id }
-                                    title={ t(filter.title) }
-                                    isSelected={ filterName === filter.id }/>
-                )
-            }
-        </div>
-    );
-
-    const searchResult: ReactNode = response && (
-        <div>
-            {
-                response.map(country => {
-                    return (
-                        <div className='search-result'>
-                            <span>{ country.name }</span>
-                        </div>
-                    );
-                })
-            }
-        </div>
-    );
 
     return (
         <div className='header'>
@@ -82,11 +53,15 @@ export const Header: FC = () => {
                        onChange={ handleChange }/>
                 <Button type='button'
                         onClick={ submitEvent }
-                        class='search-button'
+                        className='search-button'
                         name={ t('search.search') }/>
             </div>
-            { filters }
-            { searchResult }
+            <Filters onClick={ selectFilter } filterName={ filterName }/>
         </div>
     );
 };
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Header);

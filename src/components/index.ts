@@ -1,5 +1,7 @@
 export * from './button/button';
-export * from './header/header';
 export * from './filter-pill/filter-pill';
+export * from './filters/filters';
+export * from './country-card/country-card';
 
-export * from './header/filters-mapping';
+export { default as SearchResult }from './search-result/search-result';
+export { default as Header } from './header/header';

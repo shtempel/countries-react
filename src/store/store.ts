@@ -1,13 +1,15 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import thunk from 'redux-thunk';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createHashHistory, History } from 'history';
+import createSagaMiddleware from 'redux-saga';
 
 import reducers from './reducers';
+import rootSaga from './sagas';
 
 export const appHistory = createHashHistory();
+export const sagaMiddleware = createSagaMiddleware();
 
-const middleware: any[] = [thunk, routerMiddleware(appHistory)];
+const middleware: any[] = [sagaMiddleware, routerMiddleware(appHistory)];
 
 export const rootReducer = (history: History) =>
     combineReducers({
@@ -22,3 +24,5 @@ export const store = createStore(
     rootReducer(appHistory),
     composeEnhancer(applyMiddleware(...middleware))
 );
+
+sagaMiddleware.run(rootSaga);

@@ -1,7 +1,15 @@
 import { createAction } from 'typesafe-actions';
 
-export const getCountries = createAction('GET_ALL');
+import { CountryResponse } from '../../services/typings';
 
-export const getCountriesSuccess = createAction('GET_ALL_SUCCESS');
+export const fetchCountries = createAction('FETCH_COUNTRIES');
 
-export const getCountriesFailx = createAction('GET_ALL_FAIL');
+export const fetchCountriesSuccess = createAction(
+    'FETCH_COUNTRIES_SUCCESS',
+    resolve => (countries: CountryResponse[]) => resolve(countries)
+);
+
+export const fetchCountriesFail = createAction(
+    'FETCH_COUNTRIES_FAIL',
+    resolve => (payload: Error) => resolve(payload)
+);

@@ -2,21 +2,16 @@ import { Reducer } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 
 import * as actions from './actions';
-
-export interface CountriesState {
-
-}
+import { CountryResponse } from '../../services/typings';
 
 export type MoviesAction = | ActionType<typeof actions>;
 
-export const initialState: CountriesState = {};
+export const initialState: CountryResponse[] = [];
 
-const reducer: Reducer<CountriesState, MoviesAction> = (state = initialState, action) => {
+const reducer: Reducer<CountryResponse[], MoviesAction> = (state = initialState, action) => {
     switch (action.type) {
-        case getType(actions.getCountries): {
-            return {
-                ...state
-            }
+        case getType(actions.fetchCountriesSuccess): {
+            return action.payload;
         }
 
         default: {
