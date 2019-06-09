@@ -19,7 +19,9 @@ export const Button: FC<ButtonProps> = (props: ButtonProps) => {
     return (
         <button { ...props }
                 disabled={ props.disabledCondition }
-                className={ cn(`button active-button ${ props.class }`, { 'disabled-button': props.disabledCondition }) }>
+                className={
+                    cn(`button active-button ${ props.class }`, { 'disabled-button': props.disabledCondition })
+                }>
             { props.name }
         </button>
     );

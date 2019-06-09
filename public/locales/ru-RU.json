@@ -1,0 +1,18 @@
+{
+  "search": {
+    "search": "поиск",
+    "searchBy": "поиск по",
+    "findCountry": "Найдите страну"
+  },
+  "filters": {
+    "allCountries": "все страны",
+    "country": "названию страны",
+    "countryCode": "коду страны",
+    "callingCode": "телефонному коду",
+    "capital": "столице",
+    "currency": "валюте",
+    "language": "языку",
+    "region": "региону",
+    "subRegion": "подрегиону"
+  }
+}

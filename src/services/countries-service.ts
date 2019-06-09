@@ -6,7 +6,6 @@ const BASE_URL = 'https://restcountries.eu/rest/v2';
 
 export class CountriesService {
 
-    /** Get all countries */
     getCountries(query: string) {
         return axios.get<CountryResponse[]>(`${ BASE_URL }/${ query }`)
             .then(response => response.data);

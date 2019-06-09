@@ -4,6 +4,8 @@
   @include column-direction;
 
   .search-form {
+    @include row-direction;
+
     .search-input {
       opacity: 0.7;
       outline: none;
@@ -12,6 +14,7 @@
     }
 
     .search-button {
+      display: flex;
       opacity: 0.7;
       outline: none;
       font-weight: bold;
@@ -20,6 +23,25 @@
       color: $_COLOR_WHITE;
       border: none;
       flex: 1;
+    }
+  }
+
+  .filters {
+    flex-wrap: wrap;
+    @include row-direction;
+    justify-content: space-between;
+
+    span {
+      margin-top: 5px;
+    }
+  }
+
+  .search-result {
+    max-height: 50px;
+    @include column-direction;
+
+    span {
+      color: $_COLOR_WHITE;
     }
   }
 }

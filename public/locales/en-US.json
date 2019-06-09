@@ -1,0 +1,18 @@
+{
+  "search": {
+    "search": "search",
+    "searchBy": "search by",
+    "findCountry": "Find country"
+  },
+  "filters": {
+    "allCountries": "all countries",
+    "country": "country name",
+    "countryCode": "country code",
+    "callingCode": "calling code",
+    "capital": "capital",
+    "currency": "currency",
+    "language": "language",
+    "region": "region",
+    "subRegion": "subregion"
+  }
+}

@@ -7,7 +7,7 @@ const routes = (
     <div>
         <Switch>
             <Route exact path='/' component={ pages.MainPage }/>
-            <Route path='/search/:searchQuery' component={ pages.MainPage }/>
+            <Route path='/country/:countryName' component={ pages.MainPage }/>
         </Switch>
     </div>
 );
