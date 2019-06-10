@@ -5,7 +5,41 @@
   overflow: auto;
   @include column-direction;
 
-  span {
-    color: $_COLOR_WHITE;
+  &::-webkit-scrollbar {
+    width: 0;
   }
+
+  .search-item {
+    line-height: 16px;
+    align-items: center;
+    margin-top: 5px;
+    width: 100%;
+    justify-content: space-between;
+    @include row-direction;
+
+    span {
+      color: $_COLOR_WHITE;
+
+      &:hover {
+        color: $_COLOR_MANDY;
+        cursor: pointer;
+      }
+    }
+
+
+    .flag {
+      display: flex;
+      margin-left: 20px;
+      height: 16px;
+      width: 24px;
+    }
+  }
+}
+
+.icon-down {
+  color: $_COLOR_GREEN;
+  justify-content: center;
+  display: flex;
+  opacity: 0.7;
+  background-color:$_COLOR_MANDY;
 }

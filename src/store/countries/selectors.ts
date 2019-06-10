@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 
 export const countriesState = (state: AppState) => state.countries;
 
-export const selectcountriesState = createSelector(
+export const selectcountries = createSelector(
     countriesState,
     moviesState => moviesState
 );

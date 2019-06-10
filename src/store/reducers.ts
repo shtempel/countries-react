@@ -4,6 +4,6 @@ import queryReducer from './query-string/reducer';
 
 export default {
     language: languageStateReducer,
-    countriesState: countriesReducer,
+    countries: countriesReducer,
     query: queryReducer
 };

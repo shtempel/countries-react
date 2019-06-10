@@ -28,7 +28,11 @@ export const Header: FC<HeaderProps> = (props: HeaderProps) => {
     const [filterName, setFilter] = useState('all');
     const isDisabledSearchInput: boolean = filterName === 'all';
 
-    const handleChange = (e: any) => setQueryString(e.target.value);
+    const handleChange = (e: any) => {
+        setQueryString(filterName + '/' + e.target.value);
+        setValue(e.target.value);
+        fetchCountries();
+    };
 
     const submitEvent = () => fetchCountries();
 
@@ -39,6 +43,7 @@ export const Header: FC<HeaderProps> = (props: HeaderProps) => {
 
         setFilter(id);
         setValue('');
+        setQueryString(value);
     };
 
     return (
