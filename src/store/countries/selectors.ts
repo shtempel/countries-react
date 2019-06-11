@@ -1,9 +1,14 @@
 import { AppState } from '../typings';
 import { createSelector } from 'reselect';
 
-export const countriesState = (state: AppState) => state.countries;
+export const countriesState = (state: AppState) => state.countriesState;
 
-export const selectcountries = createSelector(
+export const selectCountries = createSelector(
     countriesState,
-    moviesState => moviesState
+    countriesState => countriesState.countries
+);
+
+export const selectCountry = createSelector(
+    countriesState,
+    countriesState => countriesState.country
 );

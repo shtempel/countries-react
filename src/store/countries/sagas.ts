@@ -12,13 +12,31 @@ function* watchFetchCountries() {
 function* fetchCountries() {
     try {
         const searchQuery = yield select(selectSearchQuery);
-        const fetchedCountries = yield call([countriesService, countriesService.getCountries], searchQuery);
+        const fetchedCountries = yield call([ countriesService, countriesService.getCountries ], searchQuery);
         yield put(actions.fetchCountriesSuccess(fetchedCountries));
     } catch (error) {
         yield put(actions.fetchCountriesFail(error));
+        console.log(error)
+    }
+}
+
+
+function* watchFetchCountryByAlpha() {
+    yield throttle(1000, getType(actions.fetchCountryByAlpha), fetchCountryByAlpha);
+}
+
+function* fetchCountryByAlpha() {
+    try {
+        const searchQuery = yield select(selectSearchQuery);
+        const fetchedCountries = yield call([ countriesService, countriesService.getCountries ], searchQuery);
+        yield put(actions.fetchCountryByAlphaSuccess(fetchedCountries));
+    } catch (error) {
+        yield put(actions.fetchCountryByAlphaFail(error));
+        console.log(error)
     }
 }
 
 export const countriesSagas = [
-    watchFetchCountries()
+    watchFetchCountries(),
+    watchFetchCountryByAlpha()
 ];

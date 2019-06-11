@@ -1,0 +1,41 @@
+@import './../../styles/variables';
+
+.detailed-page {
+  color: $_COLOR_WHITE;
+  margin-top: 30px;
+  padding: 10px;
+  border: 1px solid $_COLOR_WHITE;
+  border-radius: 1%;
+  @include column-direction;
+
+  * {
+    display: flex;
+  }
+
+  .flag {
+    display: flex;
+    height: 96px;
+  }
+
+  .header {
+    align-items: center;
+    @include row-direction;
+
+    .name {
+      justify-content: center;
+      width: 100%;
+      font-size: xx-large;
+    }
+  }
+
+  .common-info {
+
+  }
+}
+
+.info-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}

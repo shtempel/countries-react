@@ -3,15 +3,34 @@ import { ActionType, getType } from 'typesafe-actions';
 
 import * as actions from './actions';
 import { CountryResponse } from '../../services/typings';
+import { emptyCountry } from './empty-country';
 
 export type MoviesAction = | ActionType<typeof actions>;
 
-export const initialState: CountryResponse[] = [];
+export interface CountriesState {
+    countries: CountryResponse[];
+    country: CountryResponse;
+}
 
-const reducer: Reducer<CountryResponse[], MoviesAction> = (state = initialState, action) => {
+const initialState: CountriesState = {
+    countries: [],
+    country: emptyCountry
+};
+
+const reducer: Reducer<CountriesState, MoviesAction> = (state = initialState, action) => {
     switch (action.type) {
         case getType(actions.fetchCountriesSuccess): {
-            return action.payload;
+            return {
+                ...state,
+                countries: action.payload
+            };
+        }
+
+        case getType(actions.fetchCountryByAlphaSuccess): {
+            return {
+                ...state,
+                country: action.payload
+            };
         }
 
         default: {

@@ -1,0 +1,13 @@
+@import './../../../styles/variables';
+
+.lighter {
+  @include lighter-font;
+}
+
+.bold {
+  @include bold-font;
+}
+
+.bolder {
+  @include bolder-font;
+}

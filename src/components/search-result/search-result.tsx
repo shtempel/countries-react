@@ -3,29 +3,39 @@ import { push } from 'connected-react-router';
 import { connect } from 'react-redux';
 
 import { CountryResponse } from '../../services/typings';
+import { fetchCountryByAlpha } from '../../store/countries/actions';
+import { setQueryString } from '../../store/query-string/actions';
 import { AppState } from '../../store/typings';
+import { selectCountries } from '../../store/countries/selectors';
+import { Icon } from '..';
 
 import './search-result.scss';
-import { selectcountries } from '../../store/countries/selectors';
-import { Icon } from '..';
 
 interface SearchResultProps {
     countries: CountryResponse[];
 
     push(path: string): void;
+    fetchCountryByAlpha(): void;
+    setQueryString(query: string): void
 }
 
 const mapStateToProps = (state: AppState) => ({
-    countries: selectcountries(state)
+    countries: selectCountries(state)
 });
 
-const mapDispatchToProps = { push };
+const mapDispatchToProps = { push, fetchCountryByAlpha, setQueryString };
 
 const SearchResult: FC<SearchResultProps> = (props: SearchResultProps) => {
-    const { countries } = props;
-    // const navigate = () => props.push('country.name');
+    const { countries, fetchCountryByAlpha, setQueryString, push } = props;
 
-    const iconMore: ReactNode = (
+    const navigate = (e: any) => {
+        push('/');
+        push(`country/:${ e.target.id }`);
+        setQueryString(`alpha/${ e.target.id }`);
+        fetchCountryByAlpha();
+    };
+
+    const iconMore: ReactNode = countries.length > 7 && (
         <Icon iconPrefix={ 'fas' }
               className='icon-down'
               icon='chevron-down'/>
@@ -35,18 +45,17 @@ const SearchResult: FC<SearchResultProps> = (props: SearchResultProps) => {
         <>
             <div className='search-result'>
                 {
-                    countries && countries.map(country => {
+                    countries.length > 0 && countries.map(country => {
                         return (
-                            <div className='search-item'>
-                                <span key={ country.alpha2Code }>{ country.name }</span>
+                            <div key={ country.alpha2Code } className='search-item'>
+                                <span onClick={ navigate } id={ country.alpha2Code }>{ country.name }</span>
                                 <img className='flag' src={ country.flag } alt={ country.name }/>
                             </div>
                         )
                     })
                 }
-
             </div>
-            { countries.length > 7 && iconMore }
+            { iconMore }
         </>
     );
 };

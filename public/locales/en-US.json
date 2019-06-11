@@ -14,5 +14,10 @@
     "language": "language",
     "region": "region",
     "subregion": "subregion"
+  },
+  "country": {
+    "name": "Name",
+    "region": "Region",
+    "capital": "Capital"
   }
 }

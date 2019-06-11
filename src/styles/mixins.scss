@@ -14,3 +14,16 @@
   white-space: nowrap;
   width: 100px;
 }
+
+@mixin lighter-font {
+  font-weight: 100;
+}
+
+@mixin bold-font {
+  font-weight: 500;
+}
+
+@mixin bolder-font {
+  font-weight: 700;
+}
+

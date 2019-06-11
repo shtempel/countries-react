@@ -1,31 +1,31 @@
+import { push } from 'connected-react-router';
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 
 import { Button, Filters } from '..';
-
-import './header.scss';
-import { connect } from 'react-redux';
-import { AppState } from '../../store/typings';
 import { setQueryString } from '../../store/query-string/actions';
 import { fetchCountries } from '../../store/countries/actions';
 
-interface HeaderProps {
-    setQueryString(payload: string): void;
-    fetchCountries(): void;
-}
+import './header.scss';
 
-const mapStateToProps = (state: AppState) => ({});
+interface HeaderProps {
+    fetchCountries(): void;
+    setQueryString(query: string): void
+    push(path: string): void;
+}
 
 const mapDispatchToProps = {
     setQueryString,
-    fetchCountries
+    fetchCountries,
+    push
 };
 
 export const Header: FC<HeaderProps> = (props: HeaderProps) => {
     const { t } = useTranslation();
-    const { setQueryString, fetchCountries } = props;
-    const [value, setValue] = useState('');
-    const [filterName, setFilter] = useState('all');
+    const { setQueryString, fetchCountries, push } = props;
+    const [ value, setValue ] = useState('');
+    const [ filterName, setFilter ] = useState('all');
     const isDisabledSearchInput: boolean = filterName === 'all';
 
     const handleChange = (e: any) => {
@@ -34,7 +34,11 @@ export const Header: FC<HeaderProps> = (props: HeaderProps) => {
         fetchCountries();
     };
 
-    const submitEvent = () => fetchCountries();
+    const submitEvent = () => {
+        fetchCountries();
+        setQueryString('');
+        push('/');
+    };
 
     const selectFilter = (e: any) => {
         const id: string = e.target.id;
@@ -67,6 +71,6 @@ export const Header: FC<HeaderProps> = (props: HeaderProps) => {
 };
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(Header);
