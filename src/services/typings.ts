@@ -4,7 +4,7 @@ export interface CountryResponse {
     altSpellings: string[];
     region: string;
     subregion: string;
-    translations: Translations;
+    translations: Translation;
     population: number;
     latlng: number[];
     topLevelDomain: string[];
@@ -25,7 +25,7 @@ export interface CountryResponse {
     cioc: string;
 }
 
-interface Translations {
+export interface Translation {
     de: string;
     es: string;
     fr: string;
@@ -44,7 +44,7 @@ interface Currency {
     symbol: string;
 }
 
-interface Language {
+export interface Language {
     iso639_1: string;
     iso639_2: string;
     name: string;

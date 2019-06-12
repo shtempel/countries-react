@@ -1,0 +1,19 @@
+@import './../../styles/variables';
+
+.content-hidden {
+  overflow: hidden;
+}
+
+.content-show {
+  overflow: auto;
+  height: auto !important;
+}
+
+.toggle-icon {
+  margin: 5px 0 0 5px;
+  cursor: pointer;
+}
+
+.toggle-icon:hover {
+  color: $_COLOR_MANDY;
+}

@@ -18,6 +18,21 @@
   "country": {
     "name": "Name",
     "region": "Region",
-    "capital": "Capital"
+    "subregion": "Subregion",
+    "capital": "Capital",
+    "area": "Area",
+    "population": "Population",
+    "cioc": "cioc",
+    "translations": "Translations",
+    "alpha2code": "alpha2code",
+    "alpha3code": "alpha3code",
+    "callingCodes": "Calling codes",
+    "nativeName": "Native name",
+    "timezones": "Timezones",
+    "borders": "Borders",
+    "regionalBlocs": "Regional Blocs",
+    "numericCode": "Numeric code",
+    "languages": "Languages",
+    "currencies": "Currencies"
   }
 }

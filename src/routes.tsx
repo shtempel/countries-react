@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
+import { DetailedPage, MainPage } from './pages';
 
-import * as pages from './pages';
+
 
 const routes = (
-    <div>
+    <div className='router'>
         <Switch>
-            <Route exact path='/' component={ pages.MainPage }/>
-            <Route path='/country/:countryName' component={ pages.DetailedPage }/>
+            <Route exact path='/' component={ MainPage }/>
+            <Route path='/country/:countryName' component={ DetailedPage }/>
         </Switch>
     </div>
 );

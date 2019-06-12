@@ -27,3 +27,14 @@
   font-weight: 700;
 }
 
+.bold {
+  @include bold-font;
+}
+
+.row {
+  @include row-direction;
+}
+
+.column {
+  @include column-direction;
+}

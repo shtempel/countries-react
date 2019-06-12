@@ -32,7 +32,6 @@ function* fetchCountryByAlpha() {
         yield put(actions.fetchCountryByAlphaSuccess(fetchedCountries));
     } catch (error) {
         yield put(actions.fetchCountryByAlphaFail(error));
-        console.log(error)
     }
 }
 
