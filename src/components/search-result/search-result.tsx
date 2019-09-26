@@ -1,9 +1,10 @@
 import React, { FC, ReactNode } from 'react';
-import { push } from 'connected-react-router';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { CountryResponse } from '../../services/typings';
 import { fetchCountryByAlpha } from '../../store/countries/actions';
+import { dispatcher, push } from '../../store/helper';
 import { setQueryString } from '../../store/query-string/actions';
 import { AppState } from '../../store/typings';
 import { selectCountries } from '../../store/countries/selectors';
@@ -11,28 +12,15 @@ import { Icon } from '..';
 
 import './search-result.scss';
 
-interface SearchResultProps {
-    countries: CountryResponse[];
-
-    push(path: string): void;
-    fetchCountryByAlpha(): void;
-    setQueryString(query: string): void
-}
-
-const mapStateToProps = (state: AppState) => ({
-    countries: selectCountries(state)
-});
-
-const mapDispatchToProps = { push, fetchCountryByAlpha, setQueryString };
-
-const SearchResult: FC<SearchResultProps> = (props: SearchResultProps) => {
-    const { countries, fetchCountryByAlpha, setQueryString, push } = props;
+const SearchResult: FC = () => {
+    const dispatch = useDispatch<Dispatch>();
+    const  countries  = useSelector<AppState, CountryResponse[]>(selectCountries);
 
     const navigate = (e: any) => {
-        push('/');
-        push(`country/:${ e.target.id }`);
-        setQueryString(`alpha/${ e.target.id }`);
-        fetchCountryByAlpha();
+        push(dispatch,'/');
+        push(dispatch,`country/:${ e.target.id }`);
+        dispatcher(dispatch, setQueryString, `alpha/${ e.target.id }`);
+        dispatcher(dispatch, fetchCountryByAlpha);
     };
 
     const iconMore: ReactNode = countries.length > 7 && (
@@ -60,7 +48,4 @@ const SearchResult: FC<SearchResultProps> = (props: SearchResultProps) => {
     );
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SearchResult);
+export default SearchResult;

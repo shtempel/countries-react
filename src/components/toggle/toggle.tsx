@@ -13,7 +13,7 @@ interface ToggleProps {
 
 export const Toggle: FC<ToggleProps> = (props: ToggleProps) => {
     const { isVisible = true } = props;
-    const [expanded, setExpanded] = useState(false);
+    const [ expanded, setExpanded ] = useState(false);
     const iconType = expanded ? 'chevron-up' : 'chevron-down';
     const contentDivStyle = { height: props.collapsedHeight };
 

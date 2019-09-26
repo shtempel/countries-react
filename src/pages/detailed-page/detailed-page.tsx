@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from 'react';
-import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
-import { CountryResponse } from '../../services/typings';
+import { CountryResponse, Currency, Language } from '../../services/typings';
 import { selectCountry } from '../../store/countries/selectors';
 import { AppState } from '../../store/typings';
 import { PairedLabel } from './paired-label/paired-label';
@@ -11,26 +11,17 @@ import { Toggle } from '../../components';
 
 import './detailed-page.scss';
 
-
-interface DetailedPageProps {
-    country: CountryResponse;
-}
-
-const mapStateToProps = (state: AppState) => ({
-    country: selectCountry(state)
-});
-
-export const DetailedPage: FC<DetailedPageProps> = (props: DetailedPageProps) => {
+const DetailedPage: FC = () => {
     const { t } = useTranslation();
-    const { country } = props;
-    const languages: string[] = country.languages.map(language => language.name);
-    const currencies: string[] = country.currencies.map(currency => `${ currency.name } ${ currency.code } ${ currency.symbol }`);
+    const country = useSelector<AppState, CountryResponse>(selectCountry);
+    const languages: string[] = country.languages.map((language: Language) => language.name);
+    const currencies: string[] = country.currencies.map((currency: Currency) => `${ currency.name } ${ currency.code } ${ currency.symbol }`);
     const translations: ReactNode = <Translations translations={ country.translations }/>;
 
     const listNode = (array: string[], title: string): ReactNode => {
         const node: ReactNode = (
             <div className='column'>
-                { array.map(arrayItem => <span key={ arrayItem }>{ arrayItem }</span>) }
+                { array.map((arrayItem, index) => <span key={ index }>{ arrayItem }</span>) }
             </div>
         );
 
@@ -78,7 +69,4 @@ export const DetailedPage: FC<DetailedPageProps> = (props: DetailedPageProps) =>
     );
 };
 
-export default connect(
-    mapStateToProps,
-    null
-)(DetailedPage);
+export default DetailedPage;

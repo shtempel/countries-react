@@ -8,7 +8,7 @@ interface LabelProps {
     leftClassName?: string;
     leftFontWeight?: 'lighter' | 'bold' | 'bolder' | 'normal';
 
-    rightContent:  any;
+    rightContent: any;
     rightClassName?: string;
     rightFontWeight?: 'lighter' | 'bold' | 'bolder';
 

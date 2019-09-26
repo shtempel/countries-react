@@ -1,53 +1,42 @@
-import { push } from 'connected-react-router';
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 
 import { Button, Filters } from '..';
+import { dispatcher, push } from '../../store/helper';
 import { setQueryString } from '../../store/query-string/actions';
 import { fetchCountries } from '../../store/countries/actions';
 
 import './header.scss';
 
-interface HeaderProps {
-    fetchCountries(): void;
-    setQueryString(query: string): void
-    push(path: string): void;
-}
-
-const mapDispatchToProps = {
-    setQueryString,
-    fetchCountries,
-    push
-};
-
-export const Header: FC<HeaderProps> = (props: HeaderProps) => {
+export const Header: FC = () => {
     const { t } = useTranslation();
-    const { setQueryString, fetchCountries, push } = props;
+    const dispatch = useDispatch<Dispatch>();
     const [ value, setValue ] = useState('');
     const [ filterName, setFilter ] = useState('all');
     const isDisabledSearchInput: boolean = filterName === 'all';
 
     const handleChange = (e: any) => {
-        setQueryString(filterName + '/' + e.target.value);
+        dispatcher(dispatch, setQueryString, filterName + '/' + e.target.value);
         setValue(e.target.value);
-        fetchCountries();
+        dispatcher(dispatch, fetchCountries);
     };
 
     const submitEvent = () => {
-        fetchCountries();
-        setQueryString('');
-        push('/');
+        dispatcher(dispatch, fetchCountries);
+        dispatcher(dispatch, setQueryString, '');
+        push(dispatch, '/');
     };
 
     const selectFilter = (e: any) => {
         const id: string = e.target.id;
 
-        if (filterName === id) return;
+        if ( filterName === id ) return;
 
         setFilter(id);
         setValue('');
-        setQueryString(value);
+        dispatcher(dispatch, setQueryString, value);
     };
 
     return (
@@ -70,7 +59,4 @@ export const Header: FC<HeaderProps> = (props: HeaderProps) => {
     );
 };
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(Header);
+export default Header;
